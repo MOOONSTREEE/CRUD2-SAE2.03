@@ -1,0 +1,6 @@
+<h2>Supprimer la catégorie : {{ object.nom }} ?</h2>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Oui, supprimer</button>
+</form>
+<a href="{% url 'categorie_list' %}">Annuler</a>

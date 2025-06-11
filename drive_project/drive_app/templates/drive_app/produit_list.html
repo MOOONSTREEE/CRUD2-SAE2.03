@@ -1,0 +1,12 @@
+<h2>Produits</h2>
+<a href="{% url 'produit_add' %}">Ajouter un produit</a>
+<ul>
+{% for produit in object_list %}
+    <li>
+        {{ produit.nom }} ({{ produit.marque }}) — {{ produit.prix }} € —
+        Catégorie : {{ produit.categorie }}
+        [<a href="{% url 'produit_edit' produit.pk %}">Modifier</a>]
+        [<a href="{% url 'produit_delete' produit.pk %}">Supprimer</a>]
+    </li>
+{% endfor %}
+</ul>

@@ -1,0 +1,7 @@
+<h2>{% if object %}Modifier{% else %}Ajouter{% endif %} un client</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Valider</button>
+</form>
+<a href="{% url 'client_list' %}">Retour à la liste</a>

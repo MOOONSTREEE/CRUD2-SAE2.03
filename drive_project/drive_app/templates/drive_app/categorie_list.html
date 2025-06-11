@@ -1,0 +1,11 @@
+<h2>Catégories</h2>
+<a href="{% url 'categorie_add' %}">Ajouter une catégorie</a>
+<ul>
+{% for cat in object_list %}
+    <li>
+        {{ cat.nom }} — {{ cat.descriptif }}
+        [<a href="{% url 'categorie_edit' cat.pk %}">Modifier</a>]
+        [<a href="{% url 'categorie_delete' cat.pk %}">Supprimer</a>]
+    </li>
+{% endfor %}
+</ul>

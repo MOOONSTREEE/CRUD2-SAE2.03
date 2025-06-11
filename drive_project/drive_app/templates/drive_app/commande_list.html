@@ -1,0 +1,10 @@
+<h2>Commandes</h2>
+<a href="{% url 'commande_add' %}">Nouvelle commande</a>
+<ul>
+{% for commande in object_list %}
+    <li>
+        {{ commande.client }} - {{ commande.date }}
+        [<a href="{% url 'commande_detail' commande.pk %}">Détail</a>]
+    </li>
+{% endfor %}
+</ul>

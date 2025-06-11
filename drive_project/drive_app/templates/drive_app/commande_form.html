@@ -1,0 +1,17 @@
+<h2>Nouvelle commande</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ formset.management_form }}
+    <table>
+        {% for form in formset %}
+        <tr>
+            <td>{{ form.produit.label_tag }}</td>
+            <td>{{ form.produit }}</td>
+            <td>{{ form.quantite.label_tag }}</td>
+            <td>{{ form.quantite }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <button type="submit">Créer</button>
+</form>

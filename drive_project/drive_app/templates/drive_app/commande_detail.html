@@ -1,0 +1,20 @@
+<h2>Commande de {{ object.client }}</h2>
+<p>Date : {{ object.date }}</p>
+<table>
+    <tr>
+        <th>Produit</th>
+        <th>Quantité</th>
+        <th>Prix unitaire</th>
+        <th>Sous-total</th>
+    </tr>
+    {% for item in object.commandeproduit_set.all %}
+    <tr>
+        <td>{{ item.produit.nom }}</td>
+        <td>{{ item.quantite }}</td>
+        <td>{{ item.produit.prix }} €</td>
+        <td>{{ item.quantite|floatformat:2|add:"0"|floatformat:2|floatformat:2|floatformat }} €</td>
+    </tr>
+    {% endfor %}
+</table>
+<h3>Total : {{ total }} €</h3>
+<a href="{% url 'commande_list' %}">Retour</a>

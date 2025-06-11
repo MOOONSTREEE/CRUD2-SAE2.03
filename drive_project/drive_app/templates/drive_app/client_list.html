@@ -1,0 +1,11 @@
+<h2>Clients</h2>
+<a href="{% url 'client_add' %}">Ajouter un client</a>
+<ul>
+{% for client in object_list %}
+    <li>
+        {{ client.prenom }} {{ client.nom }} — {{ client.adresse }}
+        [<a href="{% url 'client_edit' client.pk %}">Modifier</a>]
+        [<a href="{% url 'client_delete' client.pk %}">Supprimer</a>]
+    </li>
+{% endfor %}
+</ul>

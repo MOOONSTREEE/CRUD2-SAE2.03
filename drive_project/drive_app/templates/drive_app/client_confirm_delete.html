@@ -1,0 +1,6 @@
+<h2>Supprimer {{ object.prenom }} {{ object.nom }} ?</h2>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Oui, supprimer</button>
+</form>
+<a href="{% url 'client_list' %}">Annuler</a>

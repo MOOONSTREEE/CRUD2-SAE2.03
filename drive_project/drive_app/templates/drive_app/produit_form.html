@@ -1,0 +1,7 @@
+<h2>{% if object %}Modifier{% else %}Ajouter{% endif %} un produit</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Valider</button>
+</form>
+<a href="{% url 'produit_list' %}">Retour à la liste</a>
