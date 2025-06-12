@@ -1,3 +1,5 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 <h2>Catégories</h2>
 <a href="{% url 'categorie_add' %}">Ajouter une catégorie</a>
 <ul>
@@ -9,3 +11,4 @@
     </li>
 {% endfor %}
 </ul>
+<a href="{% url 'accueil' %}" class="btn btn-secondary">← Retour à l'accueil</a>

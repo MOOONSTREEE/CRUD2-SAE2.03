@@ -1,3 +1,5 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 <h2>{% if object %}Modifier{% else %}Ajouter{% endif %} un client</h2>
 <form method="post">
     {% csrf_token %}

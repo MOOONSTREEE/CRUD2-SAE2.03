@@ -1,0 +1,115 @@
+/* Style général */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* Titres */
+h1, h2, h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+/* Liens et boutons */
+a, button {
+    display: inline-block;
+    margin: 0.5rem;
+    padding: 10px 18px;
+    background-color: #2c3e50;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+a:hover, button:hover {
+    background-color: #1a242f;
+}
+
+/* Bouton spécial : retour accueil */
+a.retour-accueil {
+    background-color: black;
+    color: white;
+}
+
+a.retour-accueil:hover {
+    background-color: #333;
+}
+
+/* Formulaires */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+form input, form select, form textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+form button {
+    align-self: flex-start;
+}
+
+/* Messages */
+.alert {
+    padding: 15px;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Liste d’éléments (ul ou div .list) */
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.item {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fafafa;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        padding: 1rem;
+    }
+
+    a, button {
+        width: 100%;
+        text-align: center;
+    }
+}

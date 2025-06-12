@@ -29,3 +29,6 @@ CommandeProduitFormSet = inlineformset_factory(
     extra=1,
     can_delete=True
 )
+
+class ImportProduitForm(forms.Form):
+    fichier_csv = forms.FileField(label="Fichier CSV")

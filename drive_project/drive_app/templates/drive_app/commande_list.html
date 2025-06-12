@@ -1,3 +1,5 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 <h2>Commandes</h2>
 <a href="{% url 'commande_add' %}">Nouvelle commande</a>
 <ul>
@@ -8,3 +10,4 @@
     </li>
 {% endfor %}
 </ul>
+<a href="{% url 'accueil' %}" class="btn btn-secondary">← Retour à l'accueil</a>

@@ -15,6 +15,12 @@ from .views import (
     #Commande
     commande_create, CommandeListView,
     CommandeDetailView,
+
+    #Accueil
+    accueil,
+
+    #ImporterProduit
+    importer_produits,
 )
 
 urlpatterns = [
@@ -43,6 +49,18 @@ urlpatterns = [
 
     path('commandes/', CommandeListView.as_view(), name='commande_list'),
     path('commandes/add/', commande_create, name='commande_add'),
-    path('commandes/<int:pk>/', CommandeDetailView.as_view(), name='commande_detail')
+    path('commandes/<int:pk>/', CommandeDetailView.as_view(), name='commande_detail'),
+
+    #Accueil
+
+    path('', accueil, name='accueil'),
+
+    #ImporterProduit
+
+    path('produits/import/', importer_produits, name='importer_produits'),
+
+    #CommandeDetails
+
+    path('commande/<int:pk>/fiche/', CommandeDetailView.as_view(), name='fiche_commande'),
 
 ]
