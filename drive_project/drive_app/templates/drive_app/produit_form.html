@@ -1,9 +1,33 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-<h2>{% if object %}Modifier{% else %}Ajouter{% endif %} un produit</h2>
-<form method="post" enctype="multipart/form-data">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <title>
+    {% if form.instance.pk %}Modifier{% else %}Ajouter{% endif %} un produit
+  </title>
+</head>
+<body>
+  <h2>{% if form.instance.pk %}Modifier{% else %}Ajouter{% endif %} un produit</h2>
+
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+
+    {{ form.nom.label_tag }} {{ form.nom }}<br>
+    {{ form.date_peremption.label_tag }} {{ form.date_peremption }}<br>
+
+    {{ form.photo.label_tag }}<br>
+    {{ form.photo }}        {# C’est ici que doit apparaître input type="file" #}
+    {{ form.photo.errors }}<br>
+
+    {{ form.marque.label_tag }} {{ form.marque }}<br>
+    {{ form.prix.label_tag }} {{ form.prix }}<br>
+    {{ form.categorie.label_tag }} {{ form.categorie }}<br>
+
     <button type="submit">Valider</button>
-</form>
-<a href="{% url 'produit_list' %}">Retour à la liste</a>
+  </form>
+
+  <p><a href="{% url 'produit_list' %}">← Retour à la liste</a></p>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Sélectionner une commande</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <h2>Voir la fiche d’une commande</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Voir la fiche</button>
+    <a href="{% url 'accueil' %}">← Retour à l’accueil</a>
+  </form>
+</body>
+</html>

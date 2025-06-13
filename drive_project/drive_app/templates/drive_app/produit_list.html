@@ -1,15 +1,53 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-<h2>Produits</h2>
-<a href="{% url 'produit_add' %}">Ajouter un produit</a>
-<ul>
-{% for produit in object_list %}
-    <li>
-        {{ produit.nom }} ({{ produit.marque }}) — {{ produit.prix }} € —
-        Catégorie : {{ produit.categorie }}
-        [<a href="{% url 'produit_edit' produit.pk %}">Modifier</a>]
-        [<a href="{% url 'produit_delete' produit.pk %}">Supprimer</a>]
-    </li>
-{% endfor %}
-</ul>
-<a href="{% url 'accueil' %}" class="btn btn-secondary">← Retour à l'accueil</a>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Liste des produits</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+  <h2>Produits</h2>
+  <a href="{% url 'produit_add' %}" class="btn">+ Ajouter un produit</a>
+
+  <ul class="produit-list">
+    {% for produit in object_list %}
+      <li class="produit-item">
+        {% if produit.photo %}
+          <img src="{{ produit.photo.url }}"
+               alt="{{ produit.nom }}"
+               class="produit-photo"
+               style="max-height:80px; vertical-align: middle;">
+        {% else %}
+          <span class="placeholder-photo"
+                style="display:inline-block;
+                       width:80px; height:80px;
+                       background:#f0f0f0;
+                       vertical-align: middle;
+                       text-align:center;
+                       line-height:80px;
+                       color:#999;">
+            Aucun visuel
+          </span>
+        {% endif %}
+
+        <div class="produit-info" style="margin-left:10px; display:inline-block; vertical-align: middle;">
+          <strong>{{ produit.nom }}</strong> ({{ produit.marque }}) — {{ produit.prix }} €<br>
+          Catégorie : {{ produit.categorie }}
+        </div>
+
+        <div class="actions" style="margin-left:20px; display:inline-block; vertical-align: middle;">
+          <a href="{% url 'produit_edit' produit.pk %}" class="btn">Modifier</a>
+          <a href="{% url 'produit_delete' produit.pk %}" class="btn btn-secondary">Supprimer</a>
+        </div>
+      </li>
+    {% empty %}
+      <li>Aucun produit disponible.</li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'accueil' %}" class="btn btn-secondary">← Retour à l'accueil</a>
+
+</body>
+</html>

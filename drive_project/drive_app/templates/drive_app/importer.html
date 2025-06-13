@@ -1,22 +1,38 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-{% block content %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Importer des produits (CSV)</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
   <h2>Importer des produits (CSV)</h2>
+
+  {# Bloc pour voir les messages d’erreur / warning / succès #}
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 
   <p><strong>Format attendu du fichier CSV :</strong></p>
   <ul>
     <li><code>nom</code> – nom du produit</li>
     <li><code>date_peremption</code> – format AAAA-MM-JJ (ex : 2025-12-31)</li>
-    <li><code>photo</code> – URL (optionnel ou à laisser vide si non utilisé)</li>
-    <li><code>marque</code> – nom de la marque</li>
-    <li><code>prix</code> – prix du produit en euros (ex : 19.99)</li>
-    <li><code>categorie</code> – nom exact d’une catégorie existante</li>
+    <li><code>photo</code> – URL (optionnel)</li>
+    <li><code>marque</code> – nom de la marque (optionnel)</li>
+    <li><code>prix</code> – prix en euros (ex : 19.99)</li>
+    <li><code>categorie</code> – nom exact d’une catégorie (optionnel)</li>
   </ul>
 
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Importer</button>
+    <a href="{% url 'accueil' %}" class="btn btn-secondary">← Retour à l'accueil</a>
   </form>
-{% endblock %}
-<a href="{% url 'accueil' %}" class="btn btn-secondary">← Retour à l'accueil</a>
+</body>
+</html>

@@ -7,7 +7,9 @@
     <li>
         {{ commande.client }} - {{ commande.date }}
         [<a href="{% url 'commande_detail' commande.pk %}">Détail</a>]
+        [<a href="{% url 'commande_edit' commande.pk %}">Modifier</a>]
+        [<a href="{% url 'commande_delete' commande.pk %}">Supprimer</a>]
     </li>
 {% endfor %}
 </ul>
-<a href="{% url 'accueil' %}" class="btn btn-secondary">← Retour à l'accueil</a>
+<a href="{% url 'accueil' %}" class="btn">← Retour à l’accueil</a>

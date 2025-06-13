@@ -1,6 +1,6 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
-{% block content %}
+
 <h2>Fiche de commande n°{{ object.id }}</h2>
 <p><strong>Client :</strong> {{ object.client }}</p>
 <p><strong>Date :</strong> {{ object.date }}</p>
@@ -8,24 +8,47 @@
 <table>
   <thead>
     <tr>
+      <th>Photo</th>
       <th>Produit</th>
       <th>Quantité</th>
       <th>Prix unitaire (€)</th>
-      <th>Total (€)</th>
+      <th>Total ligne (€)</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     {% for item in items %}
     <tr>
-      <td>{{ item.produit.nom }}</td>
+      <td>
+        {% if item.produit.photo %}
+          <img src="{{ item.produit.photo.url }}"
+               alt="{{ item.produit }}"
+               style="max-height:60px;">
+        {% else %}
+          <span style="display:inline-block;width:60px;height:60px;
+                       background:#eee;text-align:center;line-height:60px;
+                       color:#aaa;font-size:0.8em;">
+            —
+          </span>
+        {% endif %}
+      </td>
+      <td>{{ item.produit.nom }} ({{ item.produit.marque }})</td>
       <td>{{ item.quantite }}</td>
-      <td>{{ item.produit.prix }}</td>
-      <td>{{ item.produit.prix|floatformat:2|add:item.quantite|floatformat:2 }}</td>
+      <td>{{ item.produit.prix|floatformat:2 }}</td>
+      <td>
+        {# On suppose que tu as ajouté en vue un attribut line_total = prix*quantite #}
+        {{ item.line_total|floatformat:2 }}
+      </td>
+      <td>
+        <a href="{% url 'commande_edit' object.pk %}">Modifier</a> |
+        <a href="{% url 'commande_delete' object.pk %}">Supprimer</a>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
 
-<p><strong>Total de la commande :</strong> {{ total }} €</p>
-{% endblock %}
+<p><strong>Total de la commande :</strong> {{ total|floatformat:2 }} €</p>
+
+<a href="{% url 'commande_list' %}">← Retour aux commandes</a>
 <a href="{% url 'accueil' %}" class="btn btn-secondary">← Retour à l'accueil</a>

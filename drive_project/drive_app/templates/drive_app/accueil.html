@@ -2,19 +2,21 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Accueil Drive</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <meta charset="UTF-8">
+  <title>Accueil Drive</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>Bienvenue sur le Drive</h1>
-    <ul>
-        <li><a href="{% url 'categorie_list' %}">📁 Gérer les catégories</a></li>
-        <li><a href="{% url 'produit_list' %}">🛒 Gérer les produits</a></li>
-        <li><a href="{% url 'client_list' %}">👤 Gérer les clients</a></li>
-        <li><a href="{% url 'commande_list' %}">📦 Gérer les commandes</a></li>
-        <li><a href="{% url 'importer_produits' %}">🔽 Importer des produits (CSV)</a></li>
-        <li><a href="{% url 'fiche_commande' 1 %}">🧾 Voir fiche commande (exemple avec la commande 1)</a></li>
-    </ul>
+  <h1>Bienvenue sur le Drive</h1>
+  <ul>
+    <li><a href="{% url 'categorie_list' %}">📁 Gérer les catégories</a></li>
+    <li><a href="{% url 'produit_list' %}">🛒 Gérer les produits</a></li>
+    <li><a href="{% url 'client_list' %}">👤 Gérer les clients</a></li>
+    <li><a href="{% url 'commande_list' %}">📦 Gérer les commandes</a></li>
+    <li><a href="{% url 'importer_produits' %}">🔽 Importer des produits (CSV)</a></li>
+    <!-- Nouveau lien vers la page de sélection -->
+    <li><a href="{% url 'selection_commande' %}">🧾 Voir la fiche d’une commande</a></li>
+  </ul>
 </body>
 </html>
+

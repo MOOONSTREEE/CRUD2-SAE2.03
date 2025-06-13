@@ -1,0 +1,7 @@
+<h2>Supprimer la commande {{ commande.pk }}</h2>
+<p>Vous êtes sur le point de supprimer définitivement cette commande (client : {{ commande.client }}, date : {{ commande.date }}).</p>
+
+<form method="post">{% csrf_token %}
+  <button type="submit">Oui, supprimer</button>
+  <a href="{% url 'commande_detail' commande.pk %}">Annuler</a>
+</form>

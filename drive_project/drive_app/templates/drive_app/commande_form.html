@@ -1,19 +1,84 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-<h2>Nouvelle commande</h2>
-<form method="post">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <title>{% if form.instance.pk %}Modifier commande #{{ form.instance.pk }}{% else %}Nouvelle commande{% endif %}</title>
+</head>
+<body>
+  <h2>{% if form.instance.pk %}Modifier commande #{{ form.instance.pk }}{% else %}Nouvelle commande{% endif %}</h2>
+
+  <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    {{ formset.management_form }}
-    <table>
-        {% for form in formset %}
-        <tr>
-            <td>{{ form.produit.label_tag }}</td>
-            <td>{{ form.produit }}</td>
-            <td>{{ form.quantite.label_tag }}</td>
-            <td>{{ form.quantite }}</td>
+
+    <fieldset>
+      <legend>Produits</legend>
+      {{ formset.management_form }}
+
+      {# Prototype caché #}
+      <template id="row-template">
+        <tr class="produit-form">
+          <td>{{ formset.empty_form.id }}</td>
+          <td>{{ formset.empty_form.produit }}</td>
+          <td>{{ formset.empty_form.quantite }}</td>
+          <td>{{ formset.empty_form.DELETE }}</td>
         </tr>
-        {% endfor %}
-    </table>
-    <button type="submit">Créer</button>
-</form>
+      </template>
+
+      <table id="produits-table">
+        <thead>
+          <tr>
+            <th>Produit</th>
+            <th>Quantité</th>
+            <th>Supprimer</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for subform in formset.forms %}
+            <tr class="produit-form">
+              <td>{{ subform.id }}</td>
+              <td>{{ subform.produit }}</td>
+              <td>{{ subform.quantite }}</td>
+              <td>{{ subform.DELETE }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <button type="button" id="add-produit">+ Ajouter un produit</button>
+    </fieldset>
+
+    <button type="submit">{% if form.instance.pk %}Enregistrer{% else %}Créer{% endif %}</button>
+    <a href="{% url 'commande_list' %}">Annuler</a>
+  </form>
+
+  <script>
+    (function() {
+      const prefix     = '{{ formset.prefix }}';                // e.g. "commandeproduit_set"
+      const totalForms = document.getElementById(`id_${prefix}-TOTAL_FORMS`);
+      const tbody      = document.querySelector('#produits-table tbody');
+      const addBtn     = document.getElementById('add-produit');
+      // Récupère le HTML du prototype
+      const templateHtml = document.getElementById('row-template').innerHTML.trim();
+
+      addBtn.addEventListener('click', () => {
+        const count = parseInt(totalForms.value, 10);
+        // On crée un nouvel <tr> à partir de la template
+        let newRowHtml = templateHtml
+          .replace(/__prefix__/g, count);   // Django utilise __prefix__ dans empty_form
+        const tr = document.createElement('tbody'); // petit hack pour parser
+        tr.innerHTML = newRowHtml;
+        // Comme on a mis un <tr> dans le <tbody>, on récupère son premier enfant
+        const newRow = tr.querySelector('tr');
+
+        // On ajoute la ligne
+        tbody.appendChild(newRow);
+        // On incrémente le nombre total de formulaires
+        totalForms.value = count + 1;
+      });
+    })();
+  </script>
+</body>
+</html>
